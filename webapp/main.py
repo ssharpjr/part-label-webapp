@@ -1,4 +1,3 @@
-import os
 from flask import Flask, render_template
 from psutil import pid_exists
 
@@ -33,6 +32,20 @@ def get_fixture():
 
 @app.route("/")
 def index():
+    return render_template('status.html')
+
+
+@app.route("/restart_app")
+def restart_app():
+    message = "Restarting App..."
+    template_data = {
+        'message': message
+    }
+    return render_template('status.html', **template_data)
+
+
+@app.route("/status")
+def status():
     app_pid = int(get_app_pid_file())
     is_pid = pid_exists(app_pid)
     if is_pid:
@@ -40,11 +53,7 @@ def index():
     else:
         program_status = "Not Running"
 
-    try:
-        part_number = get_active_part_number()
-    except:
-        part_number = "NO PART NUMBER SET!"
-
+    part_number = get_active_part_number()
     fixture = get_fixture()
 
     template_data = {
@@ -53,4 +62,4 @@ def index():
         'part_number': part_number,
         'program_status': program_status,
     }
-    return render_template('main.html', **template_data)
+    return render_template('status.html', **template_data)

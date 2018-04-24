@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=""UTF-8">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript"></script>
+<link rel="stylesheet" href='/static/styles.css' />
+<title>{{ title }}</title>
+</head>
+
+<body>
+<h1>{{ title }} - {{ fixture }}</h1>
+<h2>Active Part Number: {{ part_number }}</h2>
+<h3>Program Status: {{ program_status }}</h3>
+
+<button type="button" id="restart_app">Restart App</button>
+<button type="button" id="reboot_system">Reboot System</button>
+<button type="button" id="shutdown_system">Shutdown System</button>
+
+{% if message %}
+{{ message }}
+{% endif %}
+
+</body>
+</html>
